@@ -10,6 +10,8 @@ class Blocks {
 
     fun getData(blockA: Array<*>, blockB: KClass<*>): Any {
 
+        if (blockA.isEmpty()) throw Exception("Empty Array")
+
         // определяем тип класса
         return when (blockB) {
 
@@ -26,6 +28,7 @@ class Blocks {
     private fun doMakeInt(blockA: Array<*>): Int {
         return blockA.filterIsInstance<Int>().sum()
     }
+    //возможно уточнить: либо максимальная , либо ближайшая к текущей дате?
     private fun doMakeDate(blockA: Array<*>): String {
           return (blockA.filterIsInstance<LocalDate>().max() as LocalDate)
               .format(DateTimeFormatter.ofPattern("dd.MM.yyyy",Locale("ru")))
